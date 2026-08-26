@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mustache from "mustache-express";
 import path from "path";
 import mianRoutes from "./routes/index";
+import { createMenuObject } from "./helpers/createMenuObject";
 
 dotenv.config();
 
@@ -32,7 +33,9 @@ class Server {
     this.app.use(mianRoutes);
 
     this.app.use((req: Request, res: Response) => {
-      res.send("404 - Not Found");
+      res.render("pages/404", {
+        menu: createMenuObject(""),
+      });
     });
   }
 
